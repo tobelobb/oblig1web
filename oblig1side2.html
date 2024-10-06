@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>side 2</title>
+        <link rel="stylesheet" href="oblig1.css">
+        
+    </head>
+    <body>
+        <header class="bluey">
+            <h3>Header Logo</h3>
+            <ul>
+                <li><a href="Index.html">header link 1</a></li>
+                <li><a href="oblig1side2.html">header link 2</a></li>
+                <li><a href="oblig1side3.html">header link 3</a></li>
+            </ul>
+            <hr>
+            <div class="ib1">
+                <h1 class="ib1h1">This website is awesome</h1>
+                <p class="ib1p1">Lorem ipsum dolor sit amet consectetur<br> 
+                adipisicing elit. Atque velit aliquam<br> 
+                earum ut explicabo quia neque!</p>
+                <button class="signup1">Sign Up</button>
+            </div>
+            <div class="space"></div>
+            <div class="img1">
+                This is a placeholder for an image
+            </div>
+        </header>
+        <section id="postholder">
+            
+        </section>
+        <footer class="copyright">
+            copyright&copy;
+        </footer>
+        <script>
+            let postIndex = 0;
+            for(let i = 0; i<9; i++){
+                hent();
+            }
+            function hent(){
+                postIndex++;
+                if(postIndex<=100){
+                    fetch(`https://jsonplaceholder.typicode.com/posts/${postIndex}`)
+                        .then(response => response.json())
+                        .then(json => {
+                        document.getElementById("postholder").innerHTML+=`<h3 class="postt">${json.title}</h3>`;
+                        })
+                }
+            }
+            window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                hent();
+            }
+            })
+        </script>
+    </body>
+</html>

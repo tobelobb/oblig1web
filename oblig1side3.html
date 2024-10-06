@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>vær</title>
+        <link rel="stylesheet" href="oblig1.css">
+        <script>
+
+        </script>
+    </head>
+    <body>
+        <header class="bluey">
+            <h3>Header Logo</h3>
+            <ul>
+                <li><a href="Index.html">header link 1</a></li>
+                <li><a href="oblig1side2.html">header link 2</a></li>
+                <li><a href="oblig1side3.html">header link 3</a></li>
+            </ul>
+            <hr>
+            <div class="ib1">
+                <h1 class="ib1h1">This website is awesome</h1>
+                <p class="ib1p1">Lorem ipsum dolor sit amet consectetur<br> 
+                adipisicing elit. Atque velit aliquam<br> 
+                earum ut explicabo quia neque!</p>
+                <button class="signup1">Sign Up</button>
+            </div>
+            <div class="space"></div>
+            <div class="img1">
+                This is a placeholder for an image
+            </div>
+        </header>
+        <section id="hovedver">
+            <div class="verdiv">tekst tekst</div>
+        </section>
+        <footer class="copyright">
+            copyright&copy;
+        </footer>
+        <script>
+            const steder = [
+            { navn: 'Tokyo, Japan', lat: 35.6895, lon: 139.6917 },
+            { navn: 'New York, USA', lat: 40.7128, lon: -74.0060 },
+            { navn: 'London, UK', lat: 51.5074, lon: -0.1278 },
+            { navn: 'Paris, France', lat: 48.8566, lon: 2.3522 },
+            { navn: 'Sydney, Australia', lat: -33.8688, lon: 151.2093 }
+            ];
+
+            oppdater();
+            function oppdater(){
+                document.getElementById("hovedver").innerHTML = '';
+                
+                steder.forEach(steder => {
+                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${steder.lat}&longitude=${steder.lon}&current_weather=true`)
+                    .then(svar => svar.json())
+                    .then(data=> {
+                        document.getElementById("hovedver").innerHTML+=
+                        `<div class="verdiv">
+                            <h3>${steder.navn}</h3>
+                            <p>temperatur: ${data.current_weather.temperature}°C</p>
+                            <p>vind hastighet: ${data.current_weather.windspeed} km/h</p>
+                            <p>vær kode: ${data.current_weather.weathercode}</p>
+                        </div>`;
+                    })
+                })
+            }
+            setInterval(oppdater, 60000);
+        </script>
+    </body>
+</html>
