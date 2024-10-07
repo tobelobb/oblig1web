@@ -175,6 +175,12 @@ h1 {
     gap: 20px;
     justify-content: flex-start;
 }
+.post{
+    width: 30%;
+    background-color: gray;
+    border: solid 2px black;
+    padding: 10px;
+}
 .postt{
     display: flex;
     flex-basis: 30%;
